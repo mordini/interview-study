@@ -75,17 +75,17 @@ class HashTable {
       this.resize();
     }
 
-    //take the key, create the index with hash function
+    // create the index with hash function using the key
     const index = hashStringToInt(key, this.table.length); // create index using hash function for storing
 
-    // set the value in the array using generated index
-
-    if (this.table[index]) {
-      // if the table already has that index
-      this.table[index].push([key, value]); // if so, push it into the storage array
-    } else {
+    // place the value in the array using generated index
+    // Open Addressing, placing an item in the array anywhere, despite calculated address
+    if (this.table[index] === undefined) {
       // nothing there, pass in the array with the array inside of it (chaining: (collision handling))
       this.table[index] = [[key, value]];
+    } else {
+      // if the table already has that index
+      this.table[index].push([key, value]); // if so, push it into the storage array
     }
   };
 
